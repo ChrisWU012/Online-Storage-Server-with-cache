@@ -27,7 +27,9 @@ app.post("/upload", (req, res) => {
     console.log(file);
     fs.writeFileSync(uploadedDirectory + "/" + file.name, file.data);
     memory[file.name] = file.data;
-    res.send(`You successfully uploaded your file : ${file.name}`);
+    res.send(
+      `You successfully uploaded your file : ${file.name}, plesse restart the server to download it.`
+    );
   } else {
     res.redirect("/");
   }
@@ -35,16 +37,17 @@ app.post("/upload", (req, res) => {
 
 //list out all photo
 var fileArr = fs.readdirSync(uploadedDirectory); //go to the directory files, not the whole folder
-app.get("/upload", (req, res) => {
+app.get("/file-list", (req, res) => {
   console.log("fileArr : " + fileArr);
   res.send(fileArr);
 });
 
 //download photo
-app.get("/download", (req, res) => {
+app.get("/download/:name", (req, res) => {
   console.log("fileArr : " + fileArr);
-  readFile(__dirname + `/uploaded/desert23.png`).then((file) => {
-    res.attachment(`desert23.png`);
+  console.log("hi download param", `${uploadedDirectory}/${req.params.name}`);
+  readFile(`${uploadedDirectory}/${req.params.name}`).then((file) => {
+    res.attachment(`${req.params.name}`);
     res.send(file);
   });
 });
