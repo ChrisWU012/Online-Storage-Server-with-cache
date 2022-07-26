@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Server</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Online Storage Server with Cache</a>
+            </div>
+        </div>
+    </div>
+    <div class="contain d-flex text-center">
+        <h1>Welcome to my Online Server!</h1>
+        <h3>You can upload, download files here. You can also test the API using POSTMAN</h3>
+    </div>
+    <div class="upload download">
+        <form action="/upload" enctype="multipart/form-data" method="POST">
+            <input type="file" name="file" />
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+        <ol class="file-list">
+            <span class="list-title">File List:</span>
+        </ol>
+        <a class="btn btn-warning" href="/download">Download All Photos</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
