@@ -36,7 +36,7 @@ app.post("/upload", (req, res) => {
 });
 
 //list out all photo
-var fileArr = fs.readdirSync(uploadedDirectory); //go to the directory files, not the whole folder
+var fileArr = fs.readdirSync(uploadedDirectory); //go to the directory (readdirSync()), not the folder files (readFileSync())
 app.get("/file-list", (req, res) => {
   console.log("fileArr : " + fileArr);
   res.send(fileArr);
@@ -44,8 +44,6 @@ app.get("/file-list", (req, res) => {
 
 //download photo
 app.get("/download/:name", (req, res) => {
-  console.log("fileArr : " + fileArr);
-  console.log("hi download param", `${uploadedDirectory}/${req.params.name}`);
   readFile(`${uploadedDirectory}/${req.params.name}`).then((file) => {
     res.attachment(`${req.params.name}`);
     res.send(file);

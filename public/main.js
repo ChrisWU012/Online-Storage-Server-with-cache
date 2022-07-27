@@ -1,3 +1,4 @@
+//show the file list
 $(function () {
   $.ajax({
     url: `http://localhost:8000/file-list`,
@@ -21,5 +22,3 @@ $(function () {
       console.log("Checking $.ajax: " + JSON.stringify(data));
     });
 });
-
-getData();
