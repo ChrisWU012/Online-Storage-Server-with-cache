@@ -24,11 +24,15 @@ let memory = {};
 app.post("/upload", (req, res) => {
   if (req.files) {
     console.log(req.files);
-    let files = req.files.upload;
+    let files = req.files.file;
     if (Array.isArray(files)) {
       //for multiple files chosen, but seems not working with Mac
       files.forEach((_file) => {
         fs.writeFileSync(uploadedDirectory + "/" + _file.name, _file.data);
+        memory[_file.name] = _file.data;
+        res.send(
+          `You successfully uploaded your file! Go to the home page to download them.`
+        );
       });
     } else {
       const file = req.files.file;
@@ -44,8 +48,8 @@ app.post("/upload", (req, res) => {
 });
 
 //list out all photo
-var fileArr = fs.readdirSync(uploadedDirectory); //go to the directory (readdirSync()), not the folder files (readFileSync())
 app.get("/file-list", (req, res) => {
+  var fileArr = fs.readdirSync(uploadedDirectory); //go to the directory (readdirSync()), not the folder files (readFileSync())
   res.send(fileArr);
 });
 
